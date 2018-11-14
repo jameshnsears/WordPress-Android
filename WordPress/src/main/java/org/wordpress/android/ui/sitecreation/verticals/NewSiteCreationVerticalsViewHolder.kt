@@ -46,7 +46,6 @@ sealed class NewSiteCreationVerticalsViewHolder(internal val parent: ViewGroup, 
 
         override fun onBind(uiState: VerticalsListItemUiState) {
             uiState as VerticalsSearchInputUiState
-            input.setText(uiState.query)
             input.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     AppCompatResources.getDrawable(
                             itemView.context, R.drawable.ic_search_grey_24dp
