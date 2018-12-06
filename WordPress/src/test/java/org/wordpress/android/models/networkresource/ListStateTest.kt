@@ -85,7 +85,7 @@ class ListStateTest {
 
         val errorMessage = "Some error message"
         val errorState = ListState.Error(loadingState, errorMessage)
-        assertThat(errorState.errorMessage, `is`(equalTo(errorMessage)))
+        assertThat(errorState.error, `is`(equalTo(errorMessage)))
         assertThat(errorState.data, `is`(testDataReady))
     }
 

@@ -1,6 +1,5 @@
 package org.wordpress.android.models.networkresource
 
-import android.support.annotation.StringRes
 import org.wordpress.android.models.networkresource.ListState.Error
 import org.wordpress.android.models.networkresource.ListState.Init
 import org.wordpress.android.models.networkresource.ListState.Loading
@@ -116,18 +115,16 @@ sealed class ListState<T>(val data: List<T>) {
      * It's initialized either from the previous state or from the transformed data using
      * [ListState.transform].
      *
-     * @param errorMessage will be the error string received from the API.
-     * @param errorMessageResId can be used to propagate error resourceIds from ViewModels to Views.
+     * @param error can be used for example to propagate the error, error message or error message resourceId.
      */
-    class Error<T> private constructor(
+    class Error<T, E> private constructor(
         data: List<T>,
-        val errorMessage: String? = null,
-        @StringRes val errorMessageResId: Int? = null
+        val error: E? = null
     ) : ListState<T>(data) {
-        constructor(previous: ListState<T>, errorMessage: String? = null, @StringRes errorMessageResId: Int? = null)
-                : this(previous.data, errorMessage, errorMessageResId)
+        constructor(previous: ListState<T>, error: E?)
+                : this(previous.data, error)
 
         override fun transform(transformFunc: (List<T>) -> List<T>) =
-                Error(transformFunc(data), errorMessage, errorMessageResId)
+                Error(transformFunc(data), error)
     }
 }

@@ -387,7 +387,7 @@ class PluginBrowserViewModel @Inject constructor(
             return false
         }
         return when (searchResults) {
-            is ListState.Success, is ListState.Error -> searchResults.data.isEmpty()
+            is ListState.Success, is ListState.Error<*, *> -> searchResults.data.isEmpty()
             else -> false
         }
     }

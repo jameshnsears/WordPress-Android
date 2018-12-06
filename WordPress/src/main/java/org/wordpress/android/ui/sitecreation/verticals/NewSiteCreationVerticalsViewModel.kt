@@ -169,7 +169,7 @@ class NewSiteCreationVerticalsViewModel @Inject constructor(
                         query,
                         Error(
                                 listState,
-                                errorMessageResId = R.string.site_creation_fetch_suggestions_error_no_connection
+                                R.string.site_creation_fetch_suggestions_error_no_connection
                         )
                 )
             }
@@ -182,7 +182,7 @@ class NewSiteCreationVerticalsViewModel @Inject constructor(
                     query,
                     ListState.Error(
                             listState,
-                            errorMessageResId = R.string.site_creation_fetch_suggestions_error_unknown
+                            R.string.site_creation_fetch_suggestions_error_unknown
                     )
             )
         } else {
@@ -207,8 +207,8 @@ class NewSiteCreationVerticalsViewModel @Inject constructor(
                         items = createSuggestionsUiStates(
                                 onRetry = { updateQuery(query) },
                                 data = state.data,
-                                errorFetchingSuggestions = state is Error,
-                                errorResId = if (state is Error) state.errorMessageResId else null
+                                errorFetchingSuggestions = state is Error<*,*>,
+                                errorResId = if (state is Error<*, *> && state.error is Int?) state.error else null
                         )
                 )
         )
