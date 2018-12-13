@@ -20,7 +20,7 @@ class FetchSegmentPromptUseCase @Inject constructor(
 ) {
     private var continuation: Continuation<OnSegmentPromptFetched>? = null
 
-    suspend fun fetchSegmentsPrompt(segmentId: Long): OnSegmentPromptFetched {
+    suspend fun fetchSegmentsPrompt(segmentId: String): OnSegmentPromptFetched {
         if (continuation != null) {
             throw IllegalStateException("Fetch already in progress.")
         }
@@ -28,7 +28,7 @@ class FetchSegmentPromptUseCase @Inject constructor(
             continuation = cont
             dispatcher.dispatch(
                     VerticalActionBuilder.newFetchSegmentPromptAction(
-                            FetchSegmentPromptPayload(segmentId)
+                            FetchSegmentPromptPayload(segmentId.toLong()) // TODO
                     )
             )
         }

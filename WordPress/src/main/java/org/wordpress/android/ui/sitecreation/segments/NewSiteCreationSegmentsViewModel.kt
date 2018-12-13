@@ -51,8 +51,8 @@ class NewSiteCreationSegmentsViewModel
     private val _segmentsUiState: MutableLiveData<SegmentsUiState> = MutableLiveData()
     val segmentsUiState: LiveData<SegmentsUiState> = _segmentsUiState
 
-    private val _segmentSelected = SingleLiveEvent<Long>()
-    val segmentSelected: LiveData<Long> = _segmentSelected
+    private val _segmentSelected = SingleLiveEvent<String>()
+    val segmentSelected: LiveData<String> = _segmentSelected
 
     fun start() {
         if (isStarted) return
@@ -117,7 +117,7 @@ class NewSiteCreationSegmentsViewModel
         fetchCategories()
     }
 
-    private fun onSegmentSelected(segmentId: Long) {
+    private fun onSegmentSelected(segmentId: String) {
         _segmentSelected.value = segmentId
     }
 
@@ -204,7 +204,7 @@ sealed class SegmentsItemUiState {
     object ProgressUiState : SegmentsItemUiState()
 
     data class SegmentUiState(
-        val segmentId: Long,
+        val segmentId: String,
         val title: String,
         val subtitle: String,
         val iconUrl: String,

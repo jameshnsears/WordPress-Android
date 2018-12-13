@@ -52,7 +52,7 @@ class NewSiteCreationActivity : AppCompatActivity(),
                 .observe(this, Observer { target -> target?.let { showStep(target) } })
     }
 
-    override fun onSegmentSelected(segmentId: Long) {
+    override fun onSegmentSelected(segmentId: String) {
         mainViewModel.onSegmentSelected(segmentId)
     }
 

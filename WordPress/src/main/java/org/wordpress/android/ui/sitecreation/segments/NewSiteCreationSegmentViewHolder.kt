@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,9 @@ sealed class NewSiteCreationSegmentViewHolder(internal val parent: ViewGroup, @L
             subtitle.text = uiState.subtitle
             imageManager.load(icon, IMAGE, uiState.iconUrl)
             try {
-                icon.setColorFilter(Color.parseColor(uiState.iconColor), PorterDuff.Mode.SRC_IN)
+                if (!TextUtils.isEmpty(uiState.iconColor)) {
+                    icon.setColorFilter(Color.parseColor(uiState.iconColor), PorterDuff.Mode.SRC_IN)
+                }
             } catch (e: IllegalArgumentException) {
                 AppLog.e(AppLog.T.SITE_CREATION, "Error parsing segment icon color: ${uiState.iconColor}")
             }

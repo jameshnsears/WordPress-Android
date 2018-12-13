@@ -26,13 +26,12 @@ import org.wordpress.android.ui.sitecreation.verticals.NewSiteCreationVerticalsV
 import org.wordpress.android.ui.sitecreation.verticals.NewSiteCreationVerticalsViewModel.VerticalsUiState.VerticalsFullscreenErrorUiState
 import org.wordpress.android.ui.sitecreation.verticals.NewSiteCreationVerticalsViewModel.VerticalsUiState.VerticalsFullscreenProgressUiState
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 private const val KEY_LIST_STATE = "list_state"
 
 class NewSiteCreationVerticalsFragment : NewSiteCreationBaseFormFragment<NewSiteCreationListener>() {
     private lateinit var nonNullActivity: FragmentActivity
-    private var segmentId by Delegates.notNull<Long>()
+    private lateinit var segmentId: String
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: NewSiteCreationVerticalsViewModel
@@ -86,10 +85,10 @@ class NewSiteCreationVerticalsFragment : NewSiteCreationBaseFormFragment<NewSite
         super.onCreate(savedInstanceState)
         nonNullActivity = activity!!
         (nonNullActivity.application as WordPress).component().inject(this)
-        segmentId = arguments?.getLong(EXTRA_SEGMENT_ID, -1L) ?: -1L
-        if (segmentId == -1L) {
+        if (arguments?.getString(EXTRA_SEGMENT_ID) == null) {
             throw IllegalStateException("SegmentId is required.")
         }
+        segmentId = arguments!!.getString(EXTRA_SEGMENT_ID)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -204,11 +203,11 @@ class NewSiteCreationVerticalsFragment : NewSiteCreationBaseFormFragment<NewSite
         const val TAG = "site_creation_verticals_fragment_tag"
         private const val EXTRA_SEGMENT_ID = "extra_segment_id"
 
-        fun newInstance(screenTitle: String, segmentId: Long): NewSiteCreationVerticalsFragment {
+        fun newInstance(screenTitle: String, segmentId: String): NewSiteCreationVerticalsFragment {
             val fragment = NewSiteCreationVerticalsFragment()
             val bundle = Bundle()
             bundle.putString(NewSiteCreationBaseFormFragment.EXTRA_SCREEN_TITLE, screenTitle)
-            bundle.putLong(EXTRA_SEGMENT_ID, segmentId)
+            bundle.putString(EXTRA_SEGMENT_ID, segmentId)
             fragment.arguments = bundle
             return fragment
         }

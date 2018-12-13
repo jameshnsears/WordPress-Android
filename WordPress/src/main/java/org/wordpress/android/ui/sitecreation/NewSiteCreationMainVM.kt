@@ -14,7 +14,7 @@ import org.wordpress.android.viewmodel.SingleEventObservable
 import javax.inject.Inject
 
 data class SiteCreationState(
-    val segmentId: Long? = null,
+    val segmentId: String? = null,
     val verticalId: String? = null,
     val siteTitle: String? = null,
     val siteTagLine: String? = null
@@ -48,7 +48,7 @@ class NewSiteCreationMainVM @Inject constructor() : ViewModel() {
         wizardManager.showNextStep()
     }
 
-    fun onSegmentSelected(segmentId: Long) {
+    fun onSegmentSelected(segmentId: String) {
         siteCreationState = siteCreationState.copy(segmentId = segmentId)
         wizardManager.showNextStep()
     }

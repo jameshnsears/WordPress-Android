@@ -61,7 +61,7 @@ class NewSiteCreationVerticalsViewModel @Inject constructor(
     private var listState: ListState<VerticalModel> = ListState.Init()
     private lateinit var segmentPrompt: SegmentPromptModel
 
-    private var segmentId: Long? = null
+    private var segmentId: String? = null
 
     private val _clearBtnClicked = SingleLiveEvent<Void>()
     val clearBtnClicked = _clearBtnClicked
@@ -83,7 +83,7 @@ class NewSiteCreationVerticalsViewModel @Inject constructor(
         dispatcher.unregister(fetchSegmentPromptUseCase)
     }
 
-    fun start(segmentId: Long) {
+    fun start(segmentId: String) {
         if (isStarted) {
             return
         }
