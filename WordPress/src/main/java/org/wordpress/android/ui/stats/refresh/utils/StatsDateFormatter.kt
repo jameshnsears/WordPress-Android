@@ -19,7 +19,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 private const val STATS_INPUT_FORMAT = "yyyy-MM-dd"
-private const val MONTH_FORMAT = "LLLL, yyyy"
+private const val MONTH_FORMAT = "MMM, yyyy"
 private const val YEAR_FORMAT = "yyyy"
 @Suppress("CheckStyle")
 private const val REMOVE_YEAR = "([^\\p{Alpha}']|('[\\p{Alpha}]+'))*y+([^\\p{Alpha}']|('[\\p{Alpha}]+'))*"

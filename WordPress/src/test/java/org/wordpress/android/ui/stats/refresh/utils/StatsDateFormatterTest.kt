@@ -83,7 +83,7 @@ class StatsDateFormatterTest : BaseUnitTest() {
 
         val parsedDate = statsDateFormatter.printGranularDate(unparsedDate, MONTHS)
 
-        assertThat(parsedDate).isEqualTo("December, 2018")
+        assertThat(parsedDate).isEqualTo("Dec, 2018")
     }
 
     @Test
@@ -140,6 +140,6 @@ class StatsDateFormatterTest : BaseUnitTest() {
 
         val parsedDate = statsDateFormatter.printGranularDate(unparsedDate, MONTHS)
 
-        assertThat(parsedDate).isEqualTo("Prosinec, 2018")
+        assertThat(parsedDate).isEqualTo("Pro, 2018")
     }
 }
