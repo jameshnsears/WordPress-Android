@@ -7,6 +7,7 @@ import org.junit.Test
 import org.mockito.Mock
 import org.wordpress.android.BaseUnitTest
 import org.wordpress.android.R
+import org.wordpress.android.fluxc.network.utils.StatsGranularity.DAYS
 import org.wordpress.android.fluxc.network.utils.StatsGranularity.MONTHS
 import org.wordpress.android.fluxc.network.utils.StatsGranularity.WEEKS
 import org.wordpress.android.fluxc.network.utils.StatsGranularity.YEARS
@@ -29,6 +30,15 @@ class StatsDateFormatterTest : BaseUnitTest() {
         val unparsedDate = "2018-11-25"
 
         val parsedDate = statsDateFormatter.printDate(unparsedDate)
+
+        assertThat(parsedDate).isEqualTo("Nov 25, 2018")
+    }
+
+    @Test
+    fun `prints a day date`() {
+        val unparsedDate = "2018-11-25"
+
+        val parsedDate = statsDateFormatter.printGranularDate(unparsedDate, DAYS)
 
         assertThat(parsedDate).isEqualTo("Nov 25, 2018")
     }
@@ -91,6 +101,16 @@ class StatsDateFormatterTest : BaseUnitTest() {
         val unparsedDate = "2018-11-25"
 
         val parsedDate = statsDateFormatter.printDate(unparsedDate)
+
+        assertThat(parsedDate).isEqualTo("25.11.2018")
+    }
+
+    @Test
+    fun `prints a day date in another language`() {
+        val unparsedDate = "2018-11-25"
+        whenever(localeManagerWrapper.getLocale()).thenReturn(Locale.forLanguageTag("cs"))
+
+        val parsedDate = statsDateFormatter.printGranularDate(unparsedDate, DAYS)
 
         assertThat(parsedDate).isEqualTo("25.11.2018")
     }
