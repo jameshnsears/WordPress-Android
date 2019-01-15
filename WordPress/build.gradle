@@ -25,8 +25,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 
-apply from: 'gutenberg-tasks.gradle'
-
 android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
 
 android {
@@ -46,7 +44,7 @@ android {
         versionName "alpha-144"
         versionCode 658
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 27
 
         multiDexEnabled true
 
@@ -242,6 +240,10 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+
+    implementation project(':aztec')
+    implementation project(':wordpress-shortcodes')
+    implementation project(':wordpress-comments')
 }
 
 configurations.all {
